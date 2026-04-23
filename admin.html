@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard - Municipal Complaint System</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="dashboard-wrapper">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="sidebar-brand">
+          <div class="logo">🏛️</div>
+          <h2>Municipal</h2>
+        </div>
+
+        <nav class="sidebar-nav">
+          <button class="sidebar-btn active" data-section="all">
+            <span class="icon">📋</span> All Complaints
+          </button>
+        </nav>
+
+        <div class="sidebar-user">
+          <div class="sidebar-user-info">
+            <div class="sidebar-user-avatar" id="adminAvatar">A</div>
+            <div>
+              <div class="sidebar-user-name" id="adminNameDisplay">Admin</div>
+              <div class="sidebar-user-role">Administrator</div>
+            </div>
+          </div>
+          <button id="logoutBtn" class="logout-btn">Sign Out</button>
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="main-content">
+        <!-- All Complaints Section -->
+        <section id="allSection" class="content-section active">
+          <div class="content-header">
+            <h1>All Complaints</h1>
+            <p>Manage and respond to all user complaints</p>
+          </div>
+
+          <!-- Filters -->
+          <div class="search-filter-bar">
+            <div class="search-box">
+              <input
+                type="text"
+                id="adminSearchInput"
+                placeholder="Search complaints..."
+              />
+            </div>
+            <div class="filter-group">
+              <label for="statusFilter">Status</label>
+              <select id="statusFilter">
+                <option value="">All Statuses</option>
+                <option value="Pending">Pending</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Resolved">Resolved</option>
+              </select>
+            </div>
+            <div class="filter-group">
+              <label for="categoryFilter">Category</label>
+              <select id="categoryFilter">
+                <option value="">All Categories</option>
+                <option value="Water">Water</option>
+                <option value="Electricity">Electricity</option>
+                <option value="Roads">Roads</option>
+                <option value="Sanitation">Sanitation</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Admin Complaints List -->
+          <div id="adminComplaintsList" class="complaints-grid">
+            <!-- Complaints will be dynamically inserted here -->
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <!-- Response Modal -->
+    <div id="responseModal" class="modal hidden">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Respond to Complaint</h3>
+          <button class="modal-close" id="closeModal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="complaint-details">
+            <p>
+              <strong>Complaint ID:</strong> <span id="modalComplaintId"></span>
+            </p>
+            <p>
+              <strong>Title:</strong> <span id="modalComplaintTitle"></span>
+            </p>
+            <p><strong>User:</strong> <span id="modalComplaintUser"></span></p>
+            <p>
+              <strong>Category:</strong>
+              <span id="modalComplaintCategory"></span>
+            </p>
+          </div>
+          <div class="form-group">
+            <label for="statusSelect">Update Status:</label>
+            <select id="statusSelect">
+              <option value="Pending">Pending</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Resolved">Resolved</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="adminResponse">Response Message:</label>
+            <textarea
+              id="adminResponse"
+              placeholder="Enter your response to the user..."
+              rows="4"
+            ></textarea>
+          </div>
+          <button id="submitResponse" class="submit-btn">
+            Submit Response
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
