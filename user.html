@@ -3,119 +3,97 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>User Dashboard - Municipal Complaint System</title>
+    <title>Dashboard - Municipal Complaint System</title>
     <link rel="stylesheet" href="style.css" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
   </head>
   <body>
     <div class="dashboard-wrapper">
+
       <!-- Sidebar -->
       <aside class="sidebar">
         <div class="sidebar-brand">
-          <div class="logo">🏛️</div>
+          <div class="logo">&#x1F3DB;</div>
           <h2>Municipal</h2>
         </div>
-        
         <nav class="sidebar-nav">
           <button class="sidebar-btn active" data-section="submit">
-            <span class="icon">📝</span> Submit Complaint
+            <span class="icon">&#x1F4DD;</span> Submit Complaint
           </button>
           <button class="sidebar-btn" data-section="view">
-            <span class="icon">📋</span> My Complaints
+            <span class="icon">&#x1F4CB;</span> My Complaints
           </button>
         </nav>
-
         <div class="sidebar-user">
           <div class="sidebar-user-info">
             <div class="sidebar-user-avatar" id="userAvatar">U</div>
             <div>
               <div class="sidebar-user-name" id="userNameDisplay">User</div>
-              <div class="sidebar-user-role">Regular User</div>
             </div>
           </div>
           <button id="logoutBtn" class="logout-btn">Sign Out</button>
         </div>
       </aside>
 
-      <!-- Main Content -->
+      <!-- Main -->
       <main class="main-content">
         <div class="dashboard-top">
           <div class="dashboard-hero">
             <div>
-              <span class="hero-badge">User dashboard</span>
-              <h1 id="dashboardGreeting">Welcome back, User!</h1>
-              <p>Track your complaints, monitor status updates, and submit new requests quickly.</p>
+              <span class="hero-badge">Dashboard</span>
+              <h1 id="dashboardGreeting">Welcome back</h1>
+              <p>Your complaints and their current status.</p>
             </div>
             <button id="btnGoToSubmit" class="hero-action">Submit a Complaint</button>
           </div>
 
           <div class="dashboard-cards">
             <div class="dashboard-card card-highlight">
-              <p>Total complaints</p>
+              <p>Total</p>
               <strong id="totalComplaintsCount">0</strong>
-              <span>All complaints filed by you</span>
             </div>
             <div class="dashboard-card">
               <p>Pending</p>
               <strong id="pendingComplaintsCount">0</strong>
-              <span>Awaiting review</span>
             </div>
             <div class="dashboard-card">
-              <p>In progress</p>
+              <p>In Progress</p>
               <strong id="inProgressComplaintsCount">0</strong>
-              <span>Work in progress</span>
             </div>
             <div class="dashboard-card">
               <p>Resolved</p>
               <strong id="resolvedComplaintsCount">0</strong>
-              <span>Already resolved</span>
             </div>
           </div>
         </div>
 
-        <!-- Submit Complaint Section -->
+        <!-- Submit -->
         <section id="submitSection" class="content-section active">
           <div class="content-header">
             <h1>Submit a Complaint</h1>
-            <p>Fill out the form below to submit your complaint.</p>
+            <p>Fill out the form below.</p>
           </div>
-
           <div class="complaint-form-container">
             <h3>Complaint Details</h3>
             <form id="complaintForm" class="complaint-form">
               <div class="form-row">
                 <div class="form-group">
                   <label for="complaintName">Full Name</label>
-                  <input
-                    type="text"
-                    id="complaintName"
-                    required
-                    placeholder="Enter your full name"
-                  />
+                  <input type="text" id="complaintName" required />
                 </div>
                 <div class="form-group">
-                  <label for="complaintEmail">Email Address</label>
-                  <input
-                    type="email"
-                    id="complaintEmail"
-                    required
-                    placeholder="Enter your email"
-                  />
+                  <label for="complaintEmail">Email</label>
+                  <input type="email" id="complaintEmail" required />
                 </div>
               </div>
               <div class="form-group">
-                <label for="complaintTitle">Complaint Title</label>
-                <input
-                  type="text"
-                  id="complaintTitle"
-                  required
-                  placeholder="Brief title for your complaint"
-                />
+                <label for="complaintTitle">Title</label>
+                <input type="text" id="complaintTitle" required placeholder="Brief title for your complaint" />
               </div>
               <div class="form-group">
                 <label for="complaintCategory">Category</label>
                 <select id="complaintCategory" required>
-                  <option value="">Select Category</option>
+                  <option value="">Select</option>
                   <option value="Water">Water</option>
                   <option value="Electricity">Electricity</option>
                   <option value="Roads">Roads</option>
@@ -125,39 +103,30 @@
               </div>
               <div class="form-group">
                 <label for="complaintDescription">Description</label>
-                <textarea
-                  id="complaintDescription"
-                  required
-                  placeholder="Describe your complaint in detail..."
-                  rows="5"
-                ></textarea>
+                <textarea id="complaintDescription" required placeholder="Describe the issue in detail..." rows="5"></textarea>
               </div>
-              <button type="submit" class="submit-btn">Submit Complaint</button>
+              <button type="submit" class="submit-btn">Submit</button>
               <p class="form-message" id="complaintMessage"></p>
             </form>
           </div>
         </section>
 
-        <!-- View Complaints Section -->
+        <!-- View -->
         <section id="viewSection" class="content-section">
           <div class="content-header">
             <h1>My Complaints</h1>
-            <p>Review your complaint history and status updates.</p>
+            <p>Your complaint history and status updates.</p>
           </div>
-
           <div class="search-filter-bar">
             <div class="search-box">
               <input type="text" id="userSearchInput" placeholder="Search complaints..." />
             </div>
           </div>
-
-          <div id="complaintsList" class="complaints-grid">
-            <!-- Complaints will be dynamically inserted here -->
-          </div>
+          <div id="complaintsList" class="complaints-grid"></div>
         </section>
+
       </main>
     </div>
-
     <script src="script.js"></script>
   </body>
 </html>

@@ -1,14 +1,5 @@
-/* ========================================
-   Municipal Complaint System - JavaScript
-   ======================================== */
-
-// ========================================
 // Utility Functions
-// ========================================
 
-/**
- * Generate a unique ID for complaints
- */
 function generateId() {
   return (
     "CMPLT-" +
@@ -18,9 +9,6 @@ function generateId() {
   );
 }
 
-/**
- * Format timestamp to readable date
- */
 function formatDate(timestamp) {
   const date = new Date(timestamp);
   return date.toLocaleDateString("en-US", {
@@ -32,24 +20,15 @@ function formatDate(timestamp) {
   });
 }
 
-/**
- * Get data from localStorage
- */
 function getFromStorage(key) {
   const data = localStorage.getItem(key);
   return data ? JSON.parse(data) : null;
 }
 
-/**
- * Save data to localStorage
- */
 function saveToStorage(key, data) {
   localStorage.setItem(key, JSON.stringify(data));
 }
 
-/**
- * Show message in form
- */
 function showMessage(elementId, message, type) {
   const element = document.getElementById(elementId);
   if (element) {
@@ -62,13 +41,8 @@ function showMessage(elementId, message, type) {
   }
 }
 
-// ========================================
 // Authentication Functions
-// ========================================
 
-/**
- * Handle login form submission
- */
 function handleLogin(event) {
   event.preventDefault();
 
@@ -90,16 +64,12 @@ function handleLogin(event) {
     return;
   }
 
-  // Get users from storage
   const users = getFromStorage("users") || [];
-
-  // Find matching user (only for 'user' role)
   const user = users.find(
     (u) => u.email === email && u.password === password && u.role === "user",
   );
 
   if (user) {
-    // Save current user session
     saveToStorage("currentUser", user);
     window.location.href = "user.html";
   } else {
@@ -107,9 +77,6 @@ function handleLogin(event) {
   }
 }
 
-/**
- * Handle registration form submission
- */
 function handleRegister(event) {
   event.preventDefault();
 
@@ -120,54 +87,43 @@ function handleRegister(event) {
     "registerConfirmPassword",
   ).value;
 
-  // Validate passwords match
   if (password !== confirmPassword) {
     showMessage("registerMessage", "Passwords do not match!", "error");
     return;
   }
 
-  // Get existing users
   const users = getFromStorage("users") || [];
 
-  // Check if email already exists
   if (users.some((u) => u.email === email)) {
     showMessage("registerMessage", "Email already registered!", "error");
     return;
   }
 
-  // Create new user
   const newUser = {
     id: generateId(),
     name: name,
     email: email,
     password: password,
-    role: "user", // Default role for registration
+    role: "user",
     createdAt: Date.now(),
   };
 
-  // Save user
   users.push(newUser);
   saveToStorage("users", users);
 
-  // Show success message
   showMessage(
     "registerMessage",
     "Registration successful! Please login.",
     "success",
   );
 
-  // Reset form
   document.getElementById("registerForm").reset();
 
-  // Switch to login tab after delay
   setTimeout(() => {
     document.getElementById("loginBtn").click();
   }, 1500);
 }
 
-/**
- * Toggle between login and register forms
- */
 function toggleAuthForm(formToShow) {
   const loginForm = document.getElementById("loginForm");
   const registerForm = document.getElementById("registerForm");
@@ -187,9 +143,6 @@ function toggleAuthForm(formToShow) {
   }
 }
 
-/**
- * Check authentication and redirect if not logged in
- */
 function checkAuth(requiredRole) {
   const currentUser = getFromStorage("currentUser");
 
@@ -199,7 +152,6 @@ function checkAuth(requiredRole) {
   }
 
   if (requiredRole && currentUser.role !== requiredRole) {
-    // Redirect to appropriate dashboard
     if (currentUser.role === "admin") {
       window.location.href = "admin.html";
     } else {
@@ -211,44 +163,27 @@ function checkAuth(requiredRole) {
   return currentUser;
 }
 
-/**
- * Handle logout
- */
 function handleLogout() {
   localStorage.removeItem("currentUser");
   window.location.href = "index.html";
 }
 
-// ========================================
 // User Dashboard Functions
-// ========================================
 
-/**
- * Initialize user dashboard
- */
 function initUserDashboard() {
   const user = checkAuth("user");
   if (!user) return;
 
-  // Display user name and avatar
   document.getElementById("userNameDisplay").textContent = user.name;
   document.getElementById("userAvatar").textContent = user.name
     .charAt(0)
     .toUpperCase();
 
-  // Setup sidebar navigation
   setupSidebarNavigation();
-
-  // Load user complaints
   loadUserComplaints();
-
-  // Update dashboard stats
   updateDashboardStats();
-
-  // Setup search
   setupUserSearch();
 
-  // Setup complaint form
   document
     .getElementById("complaintForm")
     .addEventListener("submit", handleComplaintSubmit);
@@ -263,13 +198,9 @@ function initUserDashboard() {
     });
   }
 
-  // Setup logout
   document.getElementById("logoutBtn").addEventListener("click", handleLogout);
 }
 
-/**
- * Setup sidebar navigation for user dashboard
- */
 function setupSidebarNavigation() {
   const sidebarBtns = document.querySelectorAll(".sidebar-btn");
 
@@ -277,11 +208,9 @@ function setupSidebarNavigation() {
     btn.addEventListener("click", () => {
       const section = btn.dataset.section;
 
-      // Update active button
       sidebarBtns.forEach((b) => b.classList.remove("active"));
       btn.classList.add("active");
 
-      // Show corresponding section
       document
         .querySelectorAll(".content-section")
         .forEach((s) => s.classList.remove("active"));
@@ -290,9 +219,6 @@ function setupSidebarNavigation() {
   });
 }
 
-/**
- * Handle complaint form submission
- */
 function handleComplaintSubmit(event) {
   event.preventDefault();
 
@@ -307,10 +233,8 @@ function handleComplaintSubmit(event) {
     .getElementById("complaintDescription")
     .value.trim();
 
-  // Get existing complaints
   const complaints = getFromStorage("complaints") || [];
 
-  // Create new complaint
   const newComplaint = {
     id: generateId(),
     userId: user.id,
@@ -324,28 +248,20 @@ function handleComplaintSubmit(event) {
     createdAt: Date.now(),
   };
 
-  // Save complaint
   complaints.push(newComplaint);
   saveToStorage("complaints", complaints);
 
-  // Show success message
   showMessage(
     "complaintMessage",
     "Complaint submitted successfully!",
     "success",
   );
 
-  // Reset form
   document.getElementById("complaintForm").reset();
-
-  // Reload complaints list
   loadUserComplaints();
   updateDashboardStats();
 }
 
-/**
- * Update the dashboard summary cards for the current user
- */
 function updateDashboardStats() {
   const user = getFromStorage("currentUser");
   if (!user) return;
@@ -371,9 +287,6 @@ function updateDashboardStats() {
   if (greetingEl) greetingEl.textContent = `Welcome back, ${user.name}!`;
 }
 
-/**
- * Load and display user's complaints
- */
 function loadUserComplaints(searchTerm = "") {
   const user = getFromStorage("currentUser");
   if (!user) return;
@@ -381,7 +294,6 @@ function loadUserComplaints(searchTerm = "") {
   const complaints = getFromStorage("complaints") || [];
   const userComplaints = complaints.filter((c) => c.userId === user.id);
 
-  // Filter by search term if provided
   const filteredComplaints = searchTerm
     ? userComplaints.filter(
         (c) =>
@@ -403,18 +315,13 @@ function loadUserComplaints(searchTerm = "") {
     return;
   }
 
-  // Sort by newest first
   filteredComplaints.sort((a, b) => b.createdAt - a.createdAt);
 
-  // Generate HTML for each complaint
   container.innerHTML = filteredComplaints
     .map((complaint) => createComplaintCard(complaint, false))
     .join("");
 }
 
-/**
- * Create complaint card HTML
- */
 function createComplaintCard(complaint, isAdmin = false) {
   const statusClass = getStatusClass(complaint.status);
 
@@ -422,7 +329,7 @@ function createComplaintCard(complaint, isAdmin = false) {
   if (complaint.response) {
     responseHtml = `
             <div class="complaint-response">
-                <h4>� Admin Response</h4>
+                <h4>&#x1F4AC; Admin Response</h4>
                 <p>${complaint.response}</p>
             </div>
         `;
@@ -433,7 +340,7 @@ function createComplaintCard(complaint, isAdmin = false) {
     actionsHtml = `
             <div class="complaint-actions">
                 <button class="action-btn primary" onclick="openResponseModal('${complaint.id}')">
-                    ✏️ Respond
+                    &#x270F; Respond
                 </button>
             </div>
         `;
@@ -447,23 +354,20 @@ function createComplaintCard(complaint, isAdmin = false) {
             </div>
             <h3 class="complaint-title">${complaint.title}</h3>
             <div class="complaint-meta">
-                <span>👤 ${complaint.userName}</span>
-                <span>📧 ${complaint.userEmail}</span>
-                <span>📂 ${complaint.category}</span>
+                <span>&#x1F464; ${complaint.userName}</span>
+                <span>&#x1F4E7; ${complaint.userEmail}</span>
+                <span>&#x1F4C2; ${complaint.category}</span>
             </div>
             <p class="complaint-description">${complaint.description}</p>
             ${responseHtml}
             ${actionsHtml}
             <div class="complaint-timestamp">
-                📅 Submitted: ${formatDate(complaint.createdAt)}
+                &#x1F4C5; Submitted: ${formatDate(complaint.createdAt)}
             </div>
         </div>
     `;
 }
 
-/**
- * Get status CSS class
- */
 function getStatusClass(status) {
   switch (status) {
     case "Pending":
@@ -477,9 +381,6 @@ function getStatusClass(status) {
   }
 }
 
-/**
- * Setup user search functionality
- */
 function setupUserSearch() {
   const searchInput = document.getElementById("userSearchInput");
   let searchTimeout;
@@ -492,44 +393,26 @@ function setupUserSearch() {
   });
 }
 
-// ========================================
 // Admin Dashboard Functions
-// ========================================
 
-/**
- * Initialize admin dashboard
- */
 function initAdminDashboard() {
   const user = checkAuth("admin");
   if (!user) return;
 
-  // Display admin name and avatar
   document.getElementById("adminNameDisplay").textContent = user.name;
   document.getElementById("adminAvatar").textContent = "A";
 
-  // Load all complaints
   loadAdminComplaints();
-
-  // Setup filters
   setupFilters();
-
-  // Setup search
   setupAdminSearch();
-
-  // Setup modal
   setupModal();
 
-  // Setup logout
   document.getElementById("logoutBtn").addEventListener("click", handleLogout);
 }
 
-/**
- * Load and display all complaints for admin
- */
 function loadAdminComplaints(filters = {}) {
   const complaints = getFromStorage("complaints") || [];
 
-  // Apply filters
   let filteredComplaints = complaints;
 
   if (filters.status) {
@@ -567,18 +450,13 @@ function loadAdminComplaints(filters = {}) {
     return;
   }
 
-  // Sort by newest first
   filteredComplaints.sort((a, b) => b.createdAt - a.createdAt);
 
-  // Generate HTML for each complaint
   container.innerHTML = filteredComplaints
     .map((complaint) => createComplaintCard(complaint, true))
     .join("");
 }
 
-/**
- * Setup filter functionality
- */
 function setupFilters() {
   const statusFilter = document.getElementById("statusFilter");
   const categoryFilter = document.getElementById("categoryFilter");
@@ -595,9 +473,6 @@ function setupFilters() {
   categoryFilter.addEventListener("change", applyFilters);
 }
 
-/**
- * Setup admin search functionality
- */
 function setupAdminSearch() {
   const searchInput = document.getElementById("adminSearchInput");
   let searchTimeout;
@@ -614,59 +489,42 @@ function setupAdminSearch() {
   });
 }
 
-/**
- * Setup response modal
- */
 function setupModal() {
   const modal = document.getElementById("responseModal");
   const closeBtn = document.getElementById("closeModal");
   const submitBtn = document.getElementById("submitResponse");
 
-  // Close modal
   closeBtn.addEventListener("click", () => {
     modal.classList.add("hidden");
   });
 
-  // Close on outside click
   modal.addEventListener("click", (e) => {
     if (e.target === modal) {
       modal.classList.add("hidden");
     }
   });
 
-  // Submit response
   submitBtn.addEventListener("click", submitResponse);
 }
 
-/**
- * Open response modal for a complaint
- */
 function openResponseModal(complaintId) {
   const complaints = getFromStorage("complaints") || [];
   const complaint = complaints.find((c) => c.id === complaintId);
 
   if (!complaint) return;
 
-  // Store current complaint ID
   window.currentComplaintId = complaintId;
 
-  // Populate modal
   document.getElementById("modalComplaintId").textContent = complaint.id;
   document.getElementById("modalComplaintTitle").textContent = complaint.title;
-  document.getElementById("modalComplaintUser").textContent =
-    complaint.userName;
-  document.getElementById("modalComplaintCategory").textContent =
-    complaint.category;
+  document.getElementById("modalComplaintUser").textContent = complaint.userName;
+  document.getElementById("modalComplaintCategory").textContent = complaint.category;
   document.getElementById("statusSelect").value = complaint.status;
   document.getElementById("adminResponse").value = complaint.response || "";
 
-  // Show modal
   document.getElementById("responseModal").classList.remove("hidden");
 }
 
-/**
- * Submit response to a complaint
- */
 function submitResponse() {
   const complaintId = window.currentComplaintId;
   if (!complaintId) return;
@@ -674,55 +532,34 @@ function submitResponse() {
   const newStatus = document.getElementById("statusSelect").value;
   const response = document.getElementById("adminResponse").value.trim();
 
-  // Get complaints
   const complaints = getFromStorage("complaints") || [];
-
-  // Find and update complaint
   const index = complaints.findIndex((c) => c.id === complaintId);
+
   if (index !== -1) {
     complaints[index].status = newStatus;
     complaints[index].response = response;
 
-    // Save updated complaints
     saveToStorage("complaints", complaints);
-
-    // Close modal
     document.getElementById("responseModal").classList.add("hidden");
-
-    // Reload complaints list
     loadAdminComplaints();
   }
 }
 
-// ========================================
-// Initialize Based on Current Page
-// ========================================
+// Init
 
 document.addEventListener("DOMContentLoaded", () => {
   const path = window.location.pathname;
 
   if (path.includes("index.html") || path.endsWith("/")) {
-    // Auth page
-    document
-      .getElementById("loginForm")
-      .addEventListener("submit", handleLogin);
-    document
-      .getElementById("registerForm")
-      .addEventListener("submit", handleRegister);
-    document
-      .getElementById("loginBtn")
-      .addEventListener("click", () => toggleAuthForm("login"));
-    document
-      .getElementById("registerBtn")
-      .addEventListener("click", () => toggleAuthForm("register"));
+    document.getElementById("loginForm").addEventListener("submit", handleLogin);
+    document.getElementById("registerForm").addEventListener("submit", handleRegister);
+    document.getElementById("loginBtn").addEventListener("click", () => toggleAuthForm("login"));
+    document.getElementById("registerBtn").addEventListener("click", () => toggleAuthForm("register"));
   } else if (path.includes("user.html")) {
-    // User dashboard
     initUserDashboard();
   } else if (path.includes("admin.html")) {
-    // Admin dashboard
     initAdminDashboard();
   }
 });
 
-// Make functions available globally for inline onclick handlers
 window.openResponseModal = openResponseModal;
