@@ -1,4 +1,4 @@
-// Utility Functions
+
 
 function generateId() {
   return (
@@ -41,7 +41,7 @@ function showMessage(elementId, message, type) {
   }
 }
 
-// Authentication Functions
+
 
 function handleLogin(event) {
   event.preventDefault();
@@ -49,7 +49,7 @@ function handleLogin(event) {
   const email = document.getElementById("loginEmail").value.trim();
   const password = document.getElementById("loginPassword").value;
 
-  // Hardcoded admin credentials
+  
   if (email === "admin@gmail.com" && password === "12345678") {
     const adminUser = {
       id: "ADMIN-001",
@@ -168,7 +168,7 @@ function handleLogout() {
   window.location.href = "index.html";
 }
 
-// User Dashboard Functions
+
 
 function initUserDashboard() {
   const user = checkAuth("user");
@@ -393,7 +393,7 @@ function setupUserSearch() {
   });
 }
 
-// Admin Dashboard Functions
+
 
 function initAdminDashboard() {
   const user = checkAuth("admin");
@@ -545,7 +545,7 @@ function submitResponse() {
   }
 }
 
-// Init
+
 
 document.addEventListener("DOMContentLoaded", () => {
   const path = window.location.pathname;
