@@ -1,4 +1,4 @@
-
+// Utility Functions
 
 function generateId() {
   return (
@@ -41,15 +41,13 @@ function showMessage(elementId, message, type) {
   }
 }
 
-
-
+// Authentication Functions
 function handleLogin(event) {
   event.preventDefault();
 
   const email = document.getElementById("loginEmail").value.trim();
   const password = document.getElementById("loginPassword").value;
 
-  
   if (email === "admin@gmail.com" && password === "12345678") {
     const adminUser = {
       id: "ADMIN-001",
@@ -168,8 +166,7 @@ function handleLogout() {
   window.location.href = "index.html";
 }
 
-
-
+// User Dashboard Functions
 function initUserDashboard() {
   const user = checkAuth("user");
   if (!user) return;
@@ -393,8 +390,7 @@ function setupUserSearch() {
   });
 }
 
-
-
+// Admin Dashboard Functions
 function initAdminDashboard() {
   const user = checkAuth("admin");
   if (!user) return;
@@ -517,8 +513,10 @@ function openResponseModal(complaintId) {
 
   document.getElementById("modalComplaintId").textContent = complaint.id;
   document.getElementById("modalComplaintTitle").textContent = complaint.title;
-  document.getElementById("modalComplaintUser").textContent = complaint.userName;
-  document.getElementById("modalComplaintCategory").textContent = complaint.category;
+  document.getElementById("modalComplaintUser").textContent =
+    complaint.userName;
+  document.getElementById("modalComplaintCategory").textContent =
+    complaint.category;
   document.getElementById("statusSelect").value = complaint.status;
   document.getElementById("adminResponse").value = complaint.response || "";
 
@@ -545,16 +543,23 @@ function submitResponse() {
   }
 }
 
-
-
+// Initialization
 document.addEventListener("DOMContentLoaded", () => {
   const path = window.location.pathname;
 
   if (path.includes("index.html") || path.endsWith("/")) {
-    document.getElementById("loginForm").addEventListener("submit", handleLogin);
-    document.getElementById("registerForm").addEventListener("submit", handleRegister);
-    document.getElementById("loginBtn").addEventListener("click", () => toggleAuthForm("login"));
-    document.getElementById("registerBtn").addEventListener("click", () => toggleAuthForm("register"));
+    document
+      .getElementById("loginForm")
+      .addEventListener("submit", handleLogin);
+    document
+      .getElementById("registerForm")
+      .addEventListener("submit", handleRegister);
+    document
+      .getElementById("loginBtn")
+      .addEventListener("click", () => toggleAuthForm("login"));
+    document
+      .getElementById("registerBtn")
+      .addEventListener("click", () => toggleAuthForm("register"));
   } else if (path.includes("user.html")) {
     initUserDashboard();
   } else if (path.includes("admin.html")) {

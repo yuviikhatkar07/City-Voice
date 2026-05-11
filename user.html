@@ -1,16 +1,21 @@
 <!doctype html>
 <html lang="en">
+  <!-- Header Section -->
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard - Municipal Complaint System</title>
     <link rel="stylesheet" href="style.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
   </head>
+  <!-- Main Content -->
   <body>
+    <!-- Dashboard Wrapper -->
     <div class="dashboard-wrapper">
-
-      
+      <!-- Sidebar -->
       <aside class="sidebar">
         <div class="sidebar-brand">
           <div class="logo">&#x1F3DB;</div>
@@ -35,7 +40,7 @@
         </div>
       </aside>
 
-      
+      <!-- Main Content Area -->
       <main class="main-content">
         <div class="dashboard-top">
           <div class="dashboard-hero">
@@ -44,7 +49,9 @@
               <h1 id="dashboardGreeting">Welcome back</h1>
               <p>Your complaints and their current status.</p>
             </div>
-            <button id="btnGoToSubmit" class="hero-action">Submit a Complaint</button>
+            <button id="btnGoToSubmit" class="hero-action">
+              Submit a Complaint
+            </button>
           </div>
 
           <div class="dashboard-cards">
@@ -67,7 +74,6 @@
           </div>
         </div>
 
-        
         <section id="submitSection" class="content-section active">
           <div class="content-header">
             <h1>Submit a Complaint</h1>
@@ -88,7 +94,12 @@
               </div>
               <div class="form-group">
                 <label for="complaintTitle">Title</label>
-                <input type="text" id="complaintTitle" required placeholder="Brief title for your complaint" />
+                <input
+                  type="text"
+                  id="complaintTitle"
+                  required
+                  placeholder="Brief title for your complaint"
+                />
               </div>
               <div class="form-group">
                 <label for="complaintCategory">Category</label>
@@ -103,7 +114,12 @@
               </div>
               <div class="form-group">
                 <label for="complaintDescription">Description</label>
-                <textarea id="complaintDescription" required placeholder="Describe the issue in detail..." rows="5"></textarea>
+                <textarea
+                  id="complaintDescription"
+                  required
+                  placeholder="Describe the issue in detail..."
+                  rows="5"
+                ></textarea>
               </div>
               <button type="submit" class="submit-btn">Submit</button>
               <p class="form-message" id="complaintMessage"></p>
@@ -111,7 +127,6 @@
           </div>
         </section>
 
-        
         <section id="viewSection" class="content-section">
           <div class="content-header">
             <h1>My Complaints</h1>
@@ -119,14 +134,18 @@
           </div>
           <div class="search-filter-bar">
             <div class="search-box">
-              <input type="text" id="userSearchInput" placeholder="Search complaints..." />
+              <input
+                type="text"
+                id="userSearchInput"
+                placeholder="Search complaints..."
+              />
             </div>
           </div>
           <div id="complaintsList" class="complaints-grid"></div>
         </section>
-
       </main>
     </div>
+    <!-- Scripts -->
     <script src="script.js"></script>
   </body>
 </html>

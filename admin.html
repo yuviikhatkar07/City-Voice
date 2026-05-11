@@ -1,16 +1,21 @@
 <!doctype html>
 <html lang="en">
+  <!-- Header Section -->
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin - Municipal Complaint System</title>
     <link rel="stylesheet" href="style.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
   </head>
+  <!-- Main Content -->
   <body>
+    <!-- Dashboard Wrapper -->
     <div class="dashboard-wrapper">
-
-      
+      <!-- Sidebar -->
       <aside class="sidebar">
         <div class="sidebar-brand">
           <div class="logo">&#x1F3DB;</div>
@@ -32,7 +37,7 @@
         </div>
       </aside>
 
-      
+      <!-- Main Content Area -->
       <main class="main-content">
         <section id="allSection" class="content-section active">
           <div class="content-header">
@@ -42,7 +47,11 @@
 
           <div class="search-filter-bar">
             <div class="search-box">
-              <input type="text" id="adminSearchInput" placeholder="Search complaints..." />
+              <input
+                type="text"
+                id="adminSearchInput"
+                placeholder="Search complaints..."
+              />
             </div>
             <div class="filter-group">
               <label for="statusFilter">Status</label>
@@ -69,10 +78,9 @@
           <div id="adminComplaintsList" class="complaints-grid"></div>
         </section>
       </main>
-
     </div>
 
-    
+    <!-- Response Modal -->
     <div id="responseModal" class="modal hidden">
       <div class="modal-content">
         <div class="modal-header">
@@ -82,9 +90,14 @@
         <div class="modal-body">
           <div class="complaint-details">
             <p><strong>ID:</strong> <span id="modalComplaintId"></span></p>
-            <p><strong>Title:</strong> <span id="modalComplaintTitle"></span></p>
+            <p>
+              <strong>Title:</strong> <span id="modalComplaintTitle"></span>
+            </p>
             <p><strong>User:</strong> <span id="modalComplaintUser"></span></p>
-            <p><strong>Category:</strong> <span id="modalComplaintCategory"></span></p>
+            <p>
+              <strong>Category:</strong>
+              <span id="modalComplaintCategory"></span>
+            </p>
           </div>
           <div class="form-group">
             <label for="statusSelect">Status</label>
@@ -96,13 +109,18 @@
           </div>
           <div class="form-group">
             <label for="adminResponse">Response</label>
-            <textarea id="adminResponse" placeholder="Write your response..." rows="4"></textarea>
+            <textarea
+              id="adminResponse"
+              placeholder="Write your response..."
+              rows="4"
+            ></textarea>
           </div>
           <button id="submitResponse" class="submit-btn">Submit</button>
         </div>
       </div>
     </div>
 
+    <!-- Scripts -->
     <script src="script.js"></script>
   </body>
 </html>

@@ -1,16 +1,21 @@
 <!doctype html>
 <html lang="en">
+  <!-- Header Section -->
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Municipal Complaint System</title>
     <link rel="stylesheet" href="style.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
   </head>
+  <!-- Main Content -->
   <body>
+    <!-- Authentication Wrapper -->
     <div class="auth-wrapper">
-
-      
+      <!-- Left Side Content -->
       <div class="auth-left">
         <h1>Complaint <span>Management</span> System</h1>
         <p>File, track, and resolve municipal complaints in one place.</p>
@@ -34,7 +39,7 @@
         </div>
       </div>
 
-      
+      <!-- Right Side Authentication -->
       <div class="auth-right">
         <div class="auth-box">
           <div class="auth-brand">
@@ -48,11 +53,15 @@
             <button id="registerBtn" class="toggle-btn">Register</button>
           </div>
 
-          
           <form id="loginForm" class="auth-form">
             <div class="form-group">
               <label for="loginEmail">Email</label>
-              <input type="email" id="loginEmail" required placeholder="you@example.com" />
+              <input
+                type="email"
+                id="loginEmail"
+                required
+                placeholder="you@example.com"
+              />
             </div>
             <div class="form-group">
               <label for="loginPassword">Password</label>
@@ -62,7 +71,6 @@
             <p class="form-message" id="loginMessage"></p>
           </form>
 
-          
           <form id="registerForm" class="auth-form hidden">
             <div class="form-group">
               <label for="registerName">Full Name</label>
@@ -70,24 +78,35 @@
             </div>
             <div class="form-group">
               <label for="registerEmail">Email</label>
-              <input type="email" id="registerEmail" required placeholder="you@example.com" />
+              <input
+                type="email"
+                id="registerEmail"
+                required
+                placeholder="you@example.com"
+              />
             </div>
             <div class="form-group">
               <label for="registerPassword">Password</label>
-              <input type="password" id="registerPassword" required minlength="6" />
+              <input
+                type="password"
+                id="registerPassword"
+                required
+                minlength="6"
+              />
             </div>
             <div class="form-group">
               <label for="registerConfirmPassword">Confirm Password</label>
               <input type="password" id="registerConfirmPassword" required />
             </div>
-            <button type="submit" class="auth-submit-btn">Create Account</button>
+            <button type="submit" class="auth-submit-btn">
+              Create Account
+            </button>
             <p class="form-message" id="registerMessage"></p>
           </form>
-
         </div>
       </div>
-
     </div>
+    <!-- Scripts -->
     <script src="script.js"></script>
   </body>
 </html>

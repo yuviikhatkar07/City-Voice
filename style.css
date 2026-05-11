@@ -1,5 +1,4 @@
-
-
+/* CSS Variables */
 
 :root {
   --primary-color: #1a1a2e;
@@ -19,7 +18,7 @@
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-
+/* Global Styles */
 * {
   margin: 0;
   padding: 0;
@@ -34,8 +33,7 @@ body {
   min-height: 100vh;
 }
 
-
-
+/* Authentication Styles */
 .auth-wrapper {
   min-height: 100vh;
   display: flex;
@@ -259,14 +257,12 @@ body {
   display: none !important;
 }
 
-
-
+/* Dashboard Styles */
 .dashboard-wrapper {
   display: flex;
   min-height: 100vh;
   background: var(--light-bg);
 }
-
 
 .sidebar {
   width: 280px;
@@ -398,7 +394,6 @@ body {
   color: white;
 }
 
-
 .main-content {
   flex: 1;
   margin-left: 280px;
@@ -442,8 +437,6 @@ body {
   }
 }
 
-
-
 .dashboard-top {
   display: grid;
   gap: 24px;
@@ -457,7 +450,11 @@ body {
   gap: 24px;
   padding: 28px 30px;
   border-radius: 24px;
-  background: linear-gradient(135deg, rgba(15, 52, 96, 0.12), rgba(255, 255, 255, 0.75));
+  background: linear-gradient(
+    135deg,
+    rgba(15, 52, 96, 0.12),
+    rgba(255, 255, 255, 0.75)
+  );
   box-shadow: var(--shadow);
 }
 
@@ -539,7 +536,11 @@ body {
 }
 
 .card-highlight {
-  background: linear-gradient(180deg, rgba(15, 52, 96, 0.96), rgba(15, 52, 96, 0.9));
+  background: linear-gradient(
+    180deg,
+    rgba(15, 52, 96, 0.96),
+    rgba(15, 52, 96, 0.9)
+  );
   color: white;
 }
 
@@ -551,8 +552,6 @@ body {
 .card-highlight span {
   color: rgba(255, 255, 255, 0.8);
 }
-
-
 
 .complaint-form-container {
   background: white;
@@ -633,8 +632,6 @@ body {
   box-shadow: 0 8px 25px rgba(233, 69, 96, 0.4);
 }
 
-
-
 .search-filter-bar {
   display: flex;
   flex-wrap: wrap;
@@ -706,8 +703,6 @@ body {
   outline: none;
   border-color: var(--highlight-color);
 }
-
-
 
 .complaints-grid {
   display: grid;
@@ -818,7 +813,11 @@ body {
 .complaint-response {
   margin-top: 20px;
   padding: 20px;
-  background: linear-gradient(135deg, rgba(0, 217, 165, 0.1), rgba(0, 217, 165, 0.05));
+  background: linear-gradient(
+    135deg,
+    rgba(0, 217, 165, 0.1),
+    rgba(0, 217, 165, 0.05)
+  );
   border-radius: 12px;
   border-left: 4px solid var(--success-color);
 }
@@ -873,8 +872,7 @@ body {
   box-shadow: 0 6px 20px rgba(233, 69, 96, 0.4);
 }
 
-
-
+/* Modal Styles */
 .modal {
   position: fixed;
   top: 0;
@@ -1005,8 +1003,6 @@ body {
   min-height: 120px;
 }
 
-
-
 .empty-state {
   text-align: center;
   padding: 80px 40px;
@@ -1032,8 +1028,7 @@ body {
   font-size: 1rem;
 }
 
-
-
+/* Responsive Styles */
 @media (max-width: 1200px) {
   .sidebar {
     width: 240px;
